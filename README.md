@@ -122,7 +122,7 @@ Built with an editorial luxury dark aesthetic, golden illumination, and smooth k
 
 ---
 
-## 👥 Contributors & Author
+## 👤 Author
 
 <table>
   <tr>
@@ -131,17 +131,13 @@ Built with an editorial luxury dark aesthetic, golden illumination, and smooth k
         <img src="public/karthik_portrait.jpg" width="120px;" style="border-radius:50%; object-fit: cover; aspect-ratio: 1/1;" alt="Karthik T"/><br />
         <sub><b>Karthik T</b></sub>
       </a><br />
-      <sub>Lead Developer & Data Analyst</sub><br />
+      <sub>Data Analytics & AI/ML · REVA University</sub><br />
       <a href="https://github.com/karthikkarthi18012008-star">💻 GitHub</a> • 
       <a href="https://www.linkedin.com/in/karthik-t-646271375/">💼 LinkedIn</a> • 
       <a href="mailto:karthikkarthi18012008@gmail.com">📫 Email</a>
     </td>
   </tr>
 </table>
-
-### 🤝 Acknowledgments & Attributions
-- **Template & Visual Foundation**: Inspired by the cinematic portfolio design framework by [Lohitha Damisetti](https://github.com/lohithadamisetti123/cinematic-portfolio).
-- **Institution**: [REVA University](https://www.reva.edu.in/), Bengaluru — School of Computing and Information Technology (B.Tech AI & ML 2025–2029).
 
 ---
 
