@@ -7,6 +7,7 @@
   <p><em>"Turning Data into Insight · Discovering Patterns · Communicating Truth"</em></p>
 
   <p>
+    <a href="https://e-portfolio-seven-zeta.vercel.app"><img src="https://img.shields.io/badge/Live_Demo-e--portfolio--seven--zeta.vercel.app-D4AF37?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Portfolio" /></a>
     <a href="https://github.com/karthikkarthi18012008-star"><img src="https://img.shields.io/badge/GitHub-karthikkarthi18012008--star-181717?style=for-the-badge&logo=github" alt="GitHub" /></a>
     <a href="https://www.linkedin.com/in/karthik-t-646271375/"><img src="https://img.shields.io/badge/LinkedIn-Karthik%20T-0A66C2?style=for-the-badge&logo=linkedin" alt="LinkedIn" /></a>
     <a href="mailto:karthikkarthi18012008@gmail.com"><img src="https://img.shields.io/badge/Email-karthikkarthi18012008%40gmail.com-D14836?style=for-the-badge&logo=gmail" alt="Email" /></a>
