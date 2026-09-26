@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import watermarkImg from '../assets/watermark.png';
-import karthikWalkImg from '../assets/karthik_walk_hero.jpg';
+import karthikWalk1 from '../assets/karthik_walk_1.jpg';
+import karthikWalk2 from '../assets/karthik_walk_2.jpg';
+import karthikHeroFolded from '../assets/karthik_hero_folded.jpg';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -41,6 +43,46 @@ export const HeroSection: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [walkPhase, setWalkPhase] = useState<'walk1' | 'walk2' | 'folded'>('walk1');
+
+  // Realistic Cinematic Gait & Stride Timing Loop matching Reference Video
+  useEffect(() => {
+    let timer1: number;
+    let timer2: number;
+    let timer3: number;
+    let loopTimer: number;
+
+    const runWalkCycle = () => {
+      // Step 1: Starts forward stride
+      setWalkPhase('walk1');
+
+      // Step 2: Next foot forward stride at 1.2s
+      timer1 = window.setTimeout(() => {
+        setWalkPhase('walk2');
+      }, 1200);
+
+      // Step 3: Second stride alternation at 2.4s
+      timer2 = window.setTimeout(() => {
+        setWalkPhase('walk1');
+      }, 2400);
+
+      // Step 4: Completes walk, halts into confident folded-hands stance at 3.6s
+      timer3 = window.setTimeout(() => {
+        setWalkPhase('folded');
+      }, 3600);
+    };
+
+    runWalkCycle();
+    // Continuous 8.5s complete cinematic loop
+    loopTimer = window.setInterval(runWalkCycle, 8500);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+      clearInterval(loopTimer);
+    };
+  }, []);
 
   useEffect(() => {
     setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
@@ -72,49 +114,91 @@ export const HeroSection: React.FC = () => {
         />
       )}
 
-      {/* ================= 2. KARTHIK'S CINEMATIC HERO VISUAL LAYER ================= */}
+      {/* ================= 2. KARTHIK'S CINEMATIC WALKING & EXECUTIVE VISUAL LAYER ================= */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-black flex items-center justify-end">
         
-        {/* Animated Cinematic Entrance & Executive Poise */}
+        {/* Dynamic Forward Dolly-In & Rhythmic Walking Gait Container */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 28, filter: 'blur(6px)' }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            filter: 'blur(0px)',
-          }}
-          transition={{
-            duration: 1.8,
-            ease: [0.16, 1, 0.3, 1],
-          }}
+          animate={
+            walkPhase === 'folded'
+              ? {
+                  scale: [1.1, 1.115, 1.1],
+                  y: [0, -4, 0],
+                  x: 0,
+                }
+              : {
+                  scale: [0.92, 1.0, 1.08],
+                  y: [24, 8, 20, 4, 0],
+                  x: [-6, 6, -4, 4, 0],
+                }
+          }
+          transition={
+            walkPhase === 'folded'
+              ? {
+                  scale: { duration: 4.8, repeat: Infinity, ease: 'easeInOut' },
+                  y: { duration: 4.8, repeat: Infinity, ease: 'easeInOut' },
+                  x: { duration: 0.8, ease: 'easeOut' },
+                }
+              : {
+                  scale: { duration: 3.6, ease: [0.25, 1, 0.5, 1] },
+                  y: { duration: 3.6, ease: 'easeInOut' },
+                  x: { duration: 3.6, ease: 'easeInOut' },
+                }
+          }
           className="relative h-screen w-full flex items-center justify-end pr-0 sm:pr-4 md:pr-10 lg:pr-16 xl:pr-24 origin-bottom-right"
         >
-          {/* Top Dramatic Golden Spotlight Cone */}
-          <div className="absolute -top-16 right-[15%] md:right-[22%] w-[38rem] h-[38rem] bg-gradient-to-b from-[#F7E7C4]/25 via-[#D4AF37]/10 to-transparent rounded-full blur-[110px] pointer-events-none" />
-
-          {/* Warm Ambient Backlight Halo behind Karthik */}
-          <div className="absolute top-1/4 right-[12%] md:right-[18%] w-[24rem] h-[24rem] bg-[#D4AF37]/15 rounded-full blur-[90px] pointer-events-none" />
-
-          {/* Karthik's Hero Visual: Prominent, Confident Folded-Hands Executive Posture */}
-          <motion.div
+          {/* Top Dramatic Golden Spotlight Cone tracking gait */}
+          <motion.div 
             animate={{
-              y: [0, -6, 0],
-              scale: [1, 1.015, 1],
+              opacity: walkPhase === 'folded' ? [0.85, 1, 0.85] : 0.75,
+              scale: walkPhase === 'folded' ? [1, 1.05, 1] : 0.95,
             }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="relative h-[90vh] md:h-[94vh] lg:h-[98vh] flex items-center justify-center"
-          >
-            <img
-              src={karthikWalkImg}
-              alt="Karthik T — Data Analytics & AI/ML Professional"
-              className="h-full w-auto max-w-none object-contain scale-100 md:scale-[1.06] lg:scale-[1.12] filter contrast-[1.04] brightness-[0.98] drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
+            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute -top-16 right-[15%] md:right-[22%] w-[40rem] h-[40rem] bg-gradient-to-b from-[#F7E7C4]/30 via-[#D4AF37]/12 to-transparent rounded-full blur-[115px] pointer-events-none" 
+          />
+
+          {/* Warm Ambient Backlight Halo */}
+          <div className="absolute top-1/4 right-[12%] md:right-[18%] w-[26rem] h-[26rem] bg-[#D4AF37]/20 rounded-full blur-[95px] pointer-events-none" />
+
+          {/* Multi-Frame Walking & Folded-Hands Canvas Container */}
+          <div className="relative h-[90vh] md:h-[94vh] lg:h-[98vh] flex items-center justify-center">
+            
+            {/* Frame 1: Left Stride Forward */}
+            <motion.img
+              src={karthikWalk1}
+              alt="Karthik T Walking Step 1"
+              animate={{
+                opacity: walkPhase === 'walk1' ? 1 : 0,
+                scale: walkPhase === 'walk1' ? 1 : 0.98,
+              }}
+              transition={{ duration: 0.45, ease: 'easeInOut' }}
+              className="absolute inset-0 h-full w-auto max-w-none object-contain filter contrast-[1.04] brightness-[0.98] drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
             />
-          </motion.div>
+
+            {/* Frame 2: Right Stride Forward */}
+            <motion.img
+              src={karthikWalk2}
+              alt="Karthik T Walking Step 2"
+              animate={{
+                opacity: walkPhase === 'walk2' ? 1 : 0,
+                scale: walkPhase === 'walk2' ? 1 : 0.98,
+              }}
+              transition={{ duration: 0.45, ease: 'easeInOut' }}
+              className="absolute inset-0 h-full w-auto max-w-none object-contain filter contrast-[1.04] brightness-[0.98] drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
+            />
+
+            {/* Frame 3: Poised Confident Folded-Hands Stance */}
+            <motion.img
+              src={karthikHeroFolded}
+              alt="Karthik T Executive Stance"
+              animate={{
+                opacity: walkPhase === 'folded' ? 1 : 0,
+                scale: walkPhase === 'folded' ? 1 : 1.02,
+              }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="relative h-full w-auto max-w-none object-contain filter contrast-[1.05] brightness-[1.0] drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
+            />
+          </div>
         </motion.div>
 
         {/* Ambient Gold Floating Dust Particles */}

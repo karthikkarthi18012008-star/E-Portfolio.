@@ -13,40 +13,58 @@ interface SkillCategory {
 
 const skillCategories: SkillCategory[] = [
   {
-    title: 'BUSINESS INTELLIGENCE',
-    badge: 'CORE FOCUS',
-    items: ['Power BI', 'Power Query', 'DAX', 'Data Modeling', 'Tableau'],
+    title: 'PROGRAMMING',
+    badge: 'LANGUAGES & LIBS',
+    items: ['Python', 'Pandas', 'NumPy', 'SQL'],
     description:
-      'Designing executive dashboards, formulating complex DAX calculations, performing multi-table star schema data modeling, and automated ETL transformations via Power Query.',
+      'Developing data processing scripts and analytical workflows in Python using Pandas and NumPy, alongside robust SQL querying for relational database management.',
+    stat: 'CORE SCRIPTING',
+    colSpan: 'md:col-span-6 lg:col-span-4',
+  },
+  {
+    title: 'DATA SCIENCE',
+    badge: 'MODELING & STATS',
+    items: ['Feature Engineering', 'Statistics', 'Data Visualization'],
+    description:
+      'Applying statistical modeling, feature engineering pipelines, and exploratory data visualization to uncover patterns and surface predictive business intelligence.',
+    stat: 'DATA TRANSFORMATION',
+    colSpan: 'md:col-span-6 lg:col-span-4',
+  },
+  {
+    title: 'ANALYTICS & VISUALIZATION',
+    badge: 'BI & REPORTING',
+    items: ['Power BI', 'Tableau', 'Excel'],
+    description:
+      'Crafting interactive enterprise dashboards and visual reports across Power BI and Tableau, complemented by advanced analytical and financial modeling in Excel.',
+    stat: 'EXECUTIVE REPORTING',
+    colSpan: 'md:col-span-6 lg:col-span-4',
+  },
+  {
+    title: 'POWER BI',
+    badge: 'DEEP SPECIALIZATION',
+    items: ['Power Query', 'DAX', 'Data Modeling'],
+    description:
+      'Architecting star-schema data models, authoring complex DAX measures and calculations, and orchestrating automated data transformations through Power Query.',
     stat: 'DASHBOARD ARCHITECTURE',
-    colSpan: 'lg:col-span-6',
+    colSpan: 'md:col-span-6 lg:col-span-4',
   },
   {
-    title: 'DATA ANALYTICS',
-    badge: 'CORE PILLAR',
-    items: ['SQL', 'Python', 'Pandas', 'NumPy', 'Excel'],
+    title: 'DATABASES & CLOUD',
+    badge: 'DATA INFRASTRUCTURE',
+    items: ['Microsoft SQL Server', 'Google BigQuery', 'Snowflake', 'AWS S3'],
     description:
-      'Querying relational and cloud datasets, executing exploratory data analysis (EDA), statistical aggregation, data wrangling with Pandas & NumPy, and advanced financial modeling in Excel.',
-    stat: 'EXPLORATION & MODELING',
-    colSpan: 'lg:col-span-6',
-  },
-  {
-    title: 'DATA / CLOUD INFRASTRUCTURE',
-    badge: 'CLOUD PIPELINES',
-    items: ['Google BigQuery', 'Snowflake', 'AWS S3'],
-    description:
-      'Connecting cloud data warehouses to BI reporting engines, executing cloud SQL analytics, and handling large-scale analytical datasets across modern cloud storage.',
+      'Querying and managing data across Microsoft SQL Server, cloud data warehouses including Snowflake and Google BigQuery, and scalable cloud storage via AWS S3.',
     stat: 'CLOUD WAREHOUSING',
-    colSpan: 'lg:col-span-7',
+    colSpan: 'md:col-span-6 lg:col-span-4',
   },
   {
-    title: 'ANALYTICAL WORKFLOW',
-    badge: 'METHODOLOGY',
-    items: ['Data Cleaning', 'Trend Analysis', 'DAX Measures', 'Executive Reporting'],
+    title: 'TOOLS',
+    badge: 'VERSION CONTROL',
+    items: ['Git', 'GitHub'],
     description:
-      'Systematic data transformation lifecycle: taking ambiguous raw records, establishing data integrity, discovering patterns, and presenting clear executive narratives.',
-    stat: 'RAW TO INSIGHT',
-    colSpan: 'lg:col-span-5',
+      'Managing codebase versioning, multi-branch workflows, collaborative code reviews, and structured repository tracking with Git and GitHub.',
+    stat: 'DEV COLLABORATION',
+    colSpan: 'md:col-span-6 lg:col-span-4',
   },
 ];
 
@@ -137,7 +155,7 @@ export const SkillsSection: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-6"
+          className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-6"
         >
           {skillCategories.map((block, idx) => (
             <motion.div
@@ -146,7 +164,7 @@ export const SkillsSection: React.FC = () => {
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
               whileHover={{ y: -5, transition: { duration: 0.25 } }}
-              className={`${block.colSpan} relative p-8 sm:p-9 rounded-sm border border-[#8C6D4F]/35 bg-[#100D0B]/85 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:border-[#D4AF37]/80 hover:shadow-[0_16px_45px_rgba(212,175,55,0.14)] cursor-default group`}
+              className={`${block.colSpan} relative p-8 sm:p-9 rounded-sm border border-[#8C6D4F]/35 bg-[#100D0B]/85 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:border-[#D4AF37]/80 hover:shadow-[0_16px_45px_rgba(212,175,55,0.14)] cursor-default group flex flex-col justify-between`}
             >
               {/* Top Subtle Border Highlight */}
               <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -155,34 +173,37 @@ export const SkillsSection: React.FC = () => {
               <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#D4AF37]/40 group-hover:border-[#D4AF37] transition-colors duration-300" />
               <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#D4AF37]/40 group-hover:border-[#D4AF37] transition-colors duration-300" />
 
-              {/* Card Meta Header */}
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#D4AF37] group-hover:text-[#F3DBB3] transition-colors">
-                  {block.badge}
-                </span>
-                <span className="text-[10px] font-mono px-2.5 py-0.5 border border-[#8C6D4F]/40 text-[#C4B5A5] bg-[#17130F] group-hover:border-[#D4AF37]/50 group-hover:text-white transition-all">
-                  {block.stat}
-                </span>
+              {/* Card Body */}
+              <div>
+                {/* Card Meta Header */}
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#D4AF37] group-hover:text-[#F3DBB3] transition-colors">
+                    {block.badge}
+                  </span>
+                  <span className="text-[10px] font-mono px-2.5 py-0.5 border border-[#8C6D4F]/40 text-[#C4B5A5] bg-[#17130F] group-hover:border-[#D4AF37]/50 group-hover:text-white transition-all">
+                    {block.stat}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3
+                  className="text-3xl sm:text-4xl font-normal tracking-wide text-white mb-3 group-hover:text-[#F7E7C4] transition-colors"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                >
+                  {block.title}
+                </h3>
+
+                {/* Description */}
+                <p
+                  className="text-xs sm:text-sm text-[#A8988B] font-light leading-relaxed mb-7 max-w-xl group-hover:text-[#D5CBC0] transition-colors"
+                  style={{ fontFamily: "'Montserrat', sans-serif" }}
+                >
+                  {block.description}
+                </p>
               </div>
 
-              {/* Title */}
-              <h3
-                className="text-3xl sm:text-4xl font-normal tracking-wide text-white mb-3 group-hover:text-[#F7E7C4] transition-colors"
-                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-              >
-                {block.title}
-              </h3>
-
-              {/* Description */}
-              <p
-                className="text-xs sm:text-sm text-[#A8988B] font-light leading-relaxed mb-7 max-w-xl group-hover:text-[#D5CBC0] transition-colors"
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
-              >
-                {block.description}
-              </p>
-
               {/* Interactive Tag Chips */}
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-[#8C6D4F]/20">
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-[#8C6D4F]/20 mt-auto">
                 {block.items.map((tech) => (
                   <span
                     key={tech}
